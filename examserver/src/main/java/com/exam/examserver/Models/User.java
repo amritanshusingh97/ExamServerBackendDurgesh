@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="users")
 public class User {
@@ -28,6 +31,7 @@ public class User {
 	private boolean enabled =true;
 	private String profile;
 	
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy ="user" )
 	private Set<UserRole> userRoles = new HashSet<UserRole>();
 	

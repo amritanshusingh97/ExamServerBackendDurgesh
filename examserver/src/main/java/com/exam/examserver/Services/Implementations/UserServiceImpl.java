@@ -4,6 +4,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.exam.examserver.Models.User;
 import com.exam.examserver.Models.UserRole;
@@ -20,9 +21,10 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private RoleRepository roleRepository;
 	
+	//posting user to database
 	@Override
 	public User createUser(User user, Set<UserRole> userRoles) throws Exception {
-		User local = userRepository.findByUsername(user.getUsername());
+		User local = this.userRepository.findByUsername(user.getUsername());
 		
 		if(local!=null) {
 			System.out.println("User is already there..");
@@ -30,17 +32,32 @@ public class UserServiceImpl implements UserService{
 		}
 		else {
 			for(UserRole ur : userRoles) {
-				roleRepository.save(ur.getRole());
+				this.roleRepository.save(ur.getRole());
 			}
 			
 			user.getUserRoles().addAll(userRoles);
-			local=userRepository.save(user);
 			
 		}
 		
-		
-		
-		return local;
+		return this.userRepository.save(user);
 	}
+
+	//getting data from DB by username
+	@Override
+	public User getUser(String userName) {
+		
+		return this.userRepository.findByUsername(userName);
+	}
+
+	//deleting record from DB using UserID
+	@Override
+	public void deleteUser(Long userId) {
+
+		 userRepository.deleteById(userId);
+		
+	}
+	
+	
+	
 
 }

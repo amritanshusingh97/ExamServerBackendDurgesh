@@ -30,7 +30,7 @@ public class ExamserverApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		
-		User user = new User();
+		/*User user = new User();
 		
 		UserRole userRole = new UserRole();
 		
@@ -45,7 +45,7 @@ public class ExamserverApplication implements CommandLineRunner{
 		user.setPhone("6684132168");
 		user.setUsername("amrit1997");
 		
-		role.setRoleId(45L);
+		role.setRoleId(44L);
 		role.setRoleName("ADMIN");
 		
 		userRole.setRole(role);
@@ -56,7 +56,7 @@ public class ExamserverApplication implements CommandLineRunner{
 		userRoles.add(userRole);
 		
 		userService.createUser(user, userRoles);
-		
+		*/
 	}
 
 }
